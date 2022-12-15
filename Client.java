@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Client {
@@ -13,6 +14,8 @@ public class Client {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String clientName;
+    private FileStorage fileStorage;
+    private Encrpytion encrpytion;
 
     // Constructor
     public Client(Socket socket, String clientName) {
@@ -21,12 +24,17 @@ public class Client {
             this.clientName = clientName;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+            this.fileStorage = new FileStorage(clientName);
+            this.encrpytion = new Encrpytion(1234);
+
         } catch (Exception e) {
             // Disconnect everything
             disconnect();
         }
     }
 
+    
     // Send a message to the server
     public void sendMessage() {
         try {
@@ -37,14 +45,23 @@ public class Client {
             // TODO: Make sure that the client can send messages to the server using GUI
             Scanner scanner = new Scanner(System.in);
             while (socket.isConnected()) {
+                // Get datetime to store to file database
+                LocalDateTime now = LocalDateTime.now();
+
                 String message = scanner.nextLine();
                 bufferedWriter.write(message);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
+
+                // Store into file
+                // Encrpyt Message before file
+                message = encrpytion.encrpytText(message);
+                fileStorage.writeToFile(new String[] {clientName, now.toString(), message});
             }
 
         } catch (Exception e) {
             // Disconnect everything
+            e.printStackTrace();
             disconnect();
         }
     }
@@ -58,8 +75,19 @@ public class Client {
             public void run() {
                 try {
                     while (socket.isConnected()) {
+                        // Get datetime to store to file database
+                        LocalDateTime now = LocalDateTime.now();
+
                         String message = bufferedReader.readLine();
+                        
                         System.out.println(message);
+
+                        // Decrpyt Message before storing
+                        String[] messagePart = message.split(": ");
+                        messagePart[1] = encrpytion.encrpytText(messagePart[1]);
+
+                        // Store message from incoming chat
+                        fileStorage.writeToFile(new String[] {messagePart[0], now.toString(), messagePart[1]});
                     }
                 } catch (Exception e) {
                     // Disconnect everything

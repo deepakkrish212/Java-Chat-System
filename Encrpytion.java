@@ -2,14 +2,14 @@ class Encrpytion {
     // A 64 character encrpyter that will use the values present in addition to
     // a passcode to randomize the text string
     private final static int[] encrpyter = {
-        58, 50, 42, 34, 26, 18, 10, 2,  
-        60, 52, 44, 36, 28, 20, 12, 4,  
-        62, 54, 46, 38, 30, 22, 14, 6,  
-        64, 56, 48, 40, 32, 24, 16, 8,  
-        57, 49, 41, 33, 25, 17, 9,  1,  
-        59, 51, 43, 35, 27, 19, 11, 3,  
-        61, 53, 45, 37, 29, 21, 13, 5,  
-        63, 55, 47, 39, 31, 23, 15, 7
+        8, 0, 2, 3, 6, 8, 0, 2, 
+        7, 4, 1, 4, 5, 7, 9, 1, 
+        0, 2, 9, 6, 8, 0, 2, 4,
+        9, 1, 3, 0, 7, 9, 1, 3,  
+        2, 4, 6, 8, 5, 2, 4, 6,  
+        4, 6, 8, 7, 2, 3, 6, 8,    
+        1, 3, 5, 0, 9, 1, 7, 5,  
+        3, 5, 7, 9, 1, 3, 5, 4
     };
     // Initialize
     private int[] passcode = new int[4];
@@ -29,9 +29,10 @@ class Encrpytion {
 
         // Create a char array list of the message
         char[] encrptedStrings = msgtext.toCharArray();
-
         // Integer to equally spread the the passcode over the char array
-        int indexPasscode = (msgtext.length()+1)/this.passcode.length;
+        int indexPasscode = (int) Math.ceil(((double) msgtext.length()+1)/this.passcode.length);
+        // If msgtext is less than 4 = indexPasscode will be 0
+        if (indexPasscode == 0) {indexPasscode = 1;}
         // Loop through and use passcode and encrpyter to encrpyt text
         for (int i = 0; i < msgtext.length(); i++) {
             // Change the value of char by shifting the ascii value of each character by
@@ -40,7 +41,6 @@ class Encrpytion {
             // Longer than 64 then:
             // Aftre 64th character it will reset to 0 and so forth
             int indexEncrpyter = i - 64 * (i/64);
-            
             encrptedStrings[i] = (char)(encrpyter[indexEncrpyter] + this.passcode[i/indexPasscode] + encrptedStrings[i]) ;
         }
 
@@ -56,7 +56,9 @@ class Encrpytion {
         char[] decrpytedStrings = encrptedText.toCharArray();
 
         // Integer to equally spread the the passcode over the char array
-        int indexPasscode = (encrptedText.length()+1)/this.passcode.length;
+        int indexPasscode = (int) Math.ceil(((double) encrptedText.length()+1)/this.passcode.length);
+        // If msgtext is less than 4 = indexPasscode will be 0
+        if (indexPasscode == 0) {indexPasscode = 1;}
         // Loop through and use passcode and encrpyter to decrpyt the text
         for (int i = 0; i < encrptedText.length(); i++) {
             // Change the value of char back by shifting the ascii value backward to
@@ -79,7 +81,7 @@ class Encrpytion {
 class EncrpytTest {
     public static void main(String[] args) {
 
-        String text = "Hello World My name is abemelec";
+        String text = "I am here to help";
         
         Encrpytion userEncrpytion = new Encrpytion(1331);
 

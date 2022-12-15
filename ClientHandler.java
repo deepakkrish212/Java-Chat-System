@@ -5,12 +5,12 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Iterator;
 
-import augie.edu.AbemelechDeepak.ArrayList;
+import augie.edu.AbemelechDeepak.MyArrayList;
 
 public class ClientHandler implements Runnable {
 
     // To keep track of all the clients and allows us to broadcast messages to all clients
-    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<ClientHandler>();
+    public static MyArrayList<ClientHandler> clientHandlers = new MyArrayList<ClientHandler>();
 
     // Socket object to handle the client
     private Socket socket;
