@@ -2,7 +2,7 @@ package augie.edu.AbemelechDeepak;
 
 import java.util.Iterator;
 
-public class ArrayList<E>{
+public class MyArrayList<E>{
 
     // Our own implmentation of ArrayList from scratch
     
@@ -13,7 +13,7 @@ public class ArrayList<E>{
     private int size;
     
     // Default constructor
-    public ArrayList(){
+    public MyArrayList(){
         // Set the size to 0
         size = 0;
         // Set the array to a new array of type E with a size of 10
@@ -22,7 +22,7 @@ public class ArrayList<E>{
         elements = (E[]) new Object[10];
     }
 
-    public ArrayList(int initialCapacity){
+    public MyArrayList(int initialCapacity){
         // Set the size to 0
         size = 0;
         // Set the array to a new array of type E with a size of initialCapacity
