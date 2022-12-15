@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import augie.edu.Belgovi.Encrpytion;
-import augie.edu.Belgovi.FileStorage;
-import augie.edu.Belgovi.MyArrayList;
+import augie.edu.finalProgram.Belgovi.Encrpytion;
+import augie.edu.finalProgram.Belgovi.FileStorage;
+import augie.edu.finalProgram.Belgovi.MyArrayList;
 
 public class Client {
 

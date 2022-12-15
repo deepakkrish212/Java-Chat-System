@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import augie.edu.Belgovi.ClientHandler;
+import augie.edu.finalProgram.Belgovi.ClientHandler;
 
 public class Server {
     // Important to listen to incoming traffic

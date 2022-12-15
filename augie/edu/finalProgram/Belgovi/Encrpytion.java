@@ -1,4 +1,4 @@
-package augie.edu.Belgovi;
+package augie.edu.finalProgram.Belgovi;
 
 public class Encrpytion {
     // A 64 character encrpyter that will use the values present in addition to
