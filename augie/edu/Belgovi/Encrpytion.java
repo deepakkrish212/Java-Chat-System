@@ -1,4 +1,6 @@
-class Encrpytion {
+package augie.edu.Belgovi;
+
+public class Encrpytion {
     // A 64 character encrpyter that will use the values present in addition to
     // a passcode to randomize the text string
     private final static int[] encrpyter = {

@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import augie.edu.AbemelechDeepak.MyArrayList;
+import augie.edu.Belgovi.Encrpytion;
+import augie.edu.Belgovi.FileStorage;
+import augie.edu.Belgovi.MyArrayList;
 
 public class Client {
 
@@ -33,7 +35,7 @@ public class Client {
 
             this.fileStorage = new FileStorage(clientName + ".csv");
             this.encrpytion = new Encrpytion(1234);
-            
+
             // Check if history of previous conversation exists, and load history
             Path path  = Paths.get(clientName + ".csv");
             if (Files.exists(path)) {
