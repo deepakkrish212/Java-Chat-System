@@ -5,8 +5,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.Scanner;
+
+import augie.edu.AbemelechDeepak.MyArrayList;
 
 public class Client {
 
@@ -27,7 +33,18 @@ public class Client {
 
             this.fileStorage = new FileStorage(clientName + ".csv");
             this.encrpytion = new Encrpytion(1234);
+            
+            // Check if history of previous conversation exists, and load history
+            Path path  = Paths.get(clientName + ".csv");
+            if (Files.exists(path)) {
+                MyArrayList<String[]> history = fileStorage.readfromFile();
+                Iterator<String[]> iterator = history.iterator();
+                while (iterator.hasNext()) {
+                    String[] singleLine = iterator.next();
+                    System.out.println(singleLine[0] + ": " + encrpytion.decrpytText(singleLine[2]));
+                }
 
+            }
         } catch (Exception e) {
             // Disconnect everything
             disconnect();

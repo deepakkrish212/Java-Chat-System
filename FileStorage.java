@@ -3,6 +3,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,16 +19,8 @@ public class FileStorage {
     String fileName;
 
     public FileStorage(String fileName) {
+        // Set file name
         this.fileName = fileName;
-
-        try {
-            this.writer = new BufferedWriter(new FileWriter(fileName));
-            this.writer.write("Username, Date, Message\n");
-            this.writer.close();
-        } 
-         catch (IOException e) {
-            e.printStackTrace();
-        } 
     }
 
     public void writeToFile(String[] messageStream) {
