@@ -25,7 +25,7 @@ public class Client {
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
-            this.fileStorage = new FileStorage(clientName);
+            this.fileStorage = new FileStorage(clientName + ".csv");
             this.encrpytion = new Encrpytion(1234);
 
         } catch (Exception e) {
