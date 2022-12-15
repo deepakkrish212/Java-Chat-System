@@ -77,17 +77,3 @@ class Encrpytion {
     }
 
 }
-
-class EncrpytTest {
-    public static void main(String[] args) {
-
-        String text = "I am here to help";
-        
-        Encrpytion userEncrpytion = new Encrpytion(1331);
-
-        String encrpyted = userEncrpytion.encrpytText(text);
-        System.out.println(encrpyted);
-        System.out.println(userEncrpytion.decrpytText(encrpyted));
-        
-    }
-}

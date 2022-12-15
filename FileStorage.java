@@ -58,10 +58,4 @@ public class FileStorage {
 
         return allMessageStream;
     }
-
-    public static void main(String[] args) {
-          FileStorage chatHistory = new FileStorage("Abemelech+Deepak+History.csv");
-          chatHistory.writeToFile(new String[] {"Abemelech", "Dec 13", "Hello World"});
-          chatHistory.writeToFile(new String[] {"Deepak", "Dec 13", "Hello World"});
-    }
 }
